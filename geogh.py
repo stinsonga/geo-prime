@@ -16,7 +16,7 @@ def generate_stuff(length = 32, characters = string.ascii_letters + string.digit
 while True:
     for i in range(randint(1, 32)):
         stuff = generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters)
-        os.system('echo "'+ stuff + '" >> "' + filename + '")
+        os.system('echo "'+ stuff + '" >> "' + filename)
     os.system('git add ' + filename)
     os.system('git commit -m' + commit_message + randint(1, 100))
     os.system('git push origin master')
