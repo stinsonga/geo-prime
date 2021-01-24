@@ -36,6 +36,8 @@ while True:
     # Add/commit and push changes to Github
     os.system('git add ' + filename)
     os.system('git commit -m "%s"' % (commit_message + generate_stuff(4, string.ascii_letters)))
+    # A brief pause seems to help mitigate scenarios where we get false 'everything up to date' results
+    time.sleep(2)
     os.system('git push origin %s' % branch)
     print("Done, sleeping for %d seconds" % sleep_timer)
     time.sleep(sleep_timer)
