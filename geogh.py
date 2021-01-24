@@ -14,8 +14,8 @@ filename = "blahwork.txt"
 commit_message = "Exciting stuff "
 # Percent chance to clear dump file on each run of the loop
 clear_dump = 5
-# How long to sleep between runs
-sleep_timer = (randint(1, 120) * 60)
+# How long to sleep between runs - base time
+sleep_timer = 60
 
 # Our text generator:
 def generate_stuff(length = 32, characters = string.ascii_letters + string.digits):
@@ -39,5 +39,6 @@ while True:
     # A brief pause seems to help mitigate scenarios where we get false 'everything up to date' results
     time.sleep(2)
     os.system('git push origin %s' % branch)
-    print("Done, sleeping for %d seconds" % sleep_timer)
-    time.sleep(sleep_timer)
+    sleepy_time = randint(1, 120) * sleep_timer
+    print("Done, sleeping for %d seconds" % sleepy_time)
+    time.sleep(sleepy_time)
