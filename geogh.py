@@ -9,11 +9,11 @@ github_path = "https://github.com/stinsonga/GeoGH.git"
 # Name of branch
 branch = "master"
 # Name of your textfile dump in which to store generated text
-filename = "blahwork.txt"
+filename = "blahwork"
 # Base commit message
 commit_message = "Exciting stuff "
 # Percent chance to clear dump file on each run of the loop
-clear_dump = 5
+clear_dump = 0
 # How long to sleep between runs - base time
 sleep_timer = 60
 
@@ -23,18 +23,22 @@ def generate_stuff(length = 32, characters = string.ascii_letters + string.digit
 
 # Loop runs until we stop it
 while True:
+    # Create working directory if it isn't there (uncomment on first use)
+    # TODO: check for the directory's existence and run this if needed
+    #os.system('mkdir work')
 
+    write_file = filename+generate_stuff(2, string.ascii_letters)+".txt"
     # Randomly decide whether or not to remove existing dump file:
     if(randint(0,99) < clear_dump):
         print("Clearing dump file:")
-        os.system('rm %s' % filename)
+        os.system('rm %s' % write_file)
 
     # Write to dump file
     for i in range(randint(1, 64)):
         stuff = generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters)
-        os.system('echo "%s" >> %s' % (stuff, filename))
+        os.system('echo "%s" >> work/%s' % (stuff, write_file))
     # Add/commit and push changes to Github
-    os.system('git add ' + filename)
+    os.system('git add work/%s' % write_file)
     os.system('git commit -m "%s"' % (commit_message + generate_stuff(4, string.ascii_letters)))
     # A brief pause seems to help mitigate scenarios where we get false 'everything up to date' results
     time.sleep(2)
