@@ -27,7 +27,7 @@ while True:
     # TODO: check for the directory's existence and run this if needed
     #os.system('mkdir work')
 
-    write_file = filename+generate_stuff(2, string.ascii_letters)+".txt"
+    write_file = filename+generate_stuff(2, string.ascii_letters)+".py"
     # Randomly decide whether or not to remove existing dump file:
     if(randint(0,99) < clear_dump):
         print("Clearing dump file:")
@@ -35,11 +35,13 @@ while True:
 
     # Write to dump file
     for i in range(randint(1, 64)):
-        stuff = generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters)
+        # Generate function. Body will be a commented string
+        stuff = ("def my_function%s(): \n\t#%s" % (generate_stuff(3, string.digits), (generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters))))
+        # Write to file
         os.system('echo "%s" >> work/%s' % (stuff, write_file))
     # Add/commit and push changes to Github
     os.system('git add work/%s' % write_file)
-    os.system('git commit -m "%s"' % (commit_message + generate_stuff(4, string.ascii_letters)))
+    os.system('git commit -m "%s"' % (commit_message + generate_stuff(8, string.ascii_letters)))
     # A brief pause seems to help mitigate scenarios where we get false 'everything up to date' results
     time.sleep(2)
     os.system('git push origin %s' % branch)
