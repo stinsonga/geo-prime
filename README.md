@@ -1,8 +1,8 @@
 # GeoGH
 
-A proof-of-concept Python script that will autogenerate random text and commit it to a git repo. It will continue to do this in random intervals (which can be configured) until stopped.
+A proof-of-concept Python script that will autogenerate random functions and commit them to a git repo. It will continue to do this in random intervals (which can be configured) across multiple files until stopped.
 
-Why do this? For fun, either for the joy of coding it, or to have fun with those who look at raw metrics as a way to measure software development. Run it for your own reasons :)
+Why do this? For fun, mostly. The other reason is based on personal experience with certain management styles that have sought to use coding metrics as a way to evaluate developers. This script shows how trivial it is to game such systems. If you happen to have had such a system inflicted upon you, my sympathies.
 
 Assumptions:
 - Your repo already exists
