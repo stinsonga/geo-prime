@@ -45,16 +45,19 @@ def get_generated_function():
 
 # Generate a Python fynction
 def generate_python_fun():
-    return ("def my_function%s(): \n\t#%s" % (generate_stuff(3, string.digits), (generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters))))
+    return ("def my_function%s(): \n\t#%s" % get_function_body())
 
 # Generate a Java function that returns void
 # TODO: Create a full class per file
 def generate_java_fun():
-    return ("public void my_function%s(){ \n//%s\n}" % (generate_stuff(3, string.digits), (generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters))))
+    return ("public void my_function%s(){ \n//%s\n}" % get_function_body())
 
 # Generate a Javascript function
 def generate_javascript_fun():
-    return ("function my_function%s(){ \n//%s\n}" % (generate_stuff(3, string.digits), (generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters))))
+    return ("function my_function%s(){ \n//%s\n}" % get_function_body())
+
+def get_function_body():
+    return (generate_stuff(3, string.digits), (generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters)))
 
 # This is where the work happens.
 # The loop runs until we stop it
