@@ -9,7 +9,7 @@ github_path = "https://github.com/stinsonga/GeoGH.git"
 # Name of branch
 branch = "master"
 # Name of your textfile dump in which to store generated text
-filename = "blahwork"
+filename = "example"
 # Base commit message
 commit_message = "Exciting stuff "
 # Percent chance to clear dump file on each run of the loop. Set to zero to disable
