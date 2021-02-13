@@ -4,8 +4,6 @@ import string
 import time
 from random import choice, randint
 
-# Path to your intended repo - not really used yet
-github_path = "https://github.com/stinsonga/GeoGH.git" 
 # Name of branch
 branch = "master"
 # Name of your textfile dump in which to store generated text
@@ -16,21 +14,49 @@ commit_message = "Exciting stuff "
 clear_dump = 0
 # How long to sleep between runs - base time
 sleep_timer = 60
-# File format extension
-file_format = ".py"
+# Select generated language
+language = "python"
 
 # Our text generator:
 def generate_stuff(length = 32, characters = string.ascii_letters + string.digits):
     return ''.join([choice(characters) for i in range(length)])
 
-# Loop runs until we stop it
+# Set file extension based on language
+def return_file_format():
+    if(language == "python"):
+        return ".py"
+    elif(language == "java"):
+        return ".java"
+    else:
+        return ".py"
+
+# Get generated function based on language
+def get_generated_function():
+    if(language == "python"):
+        return generate_python_fun()
+    if(language == "java"):
+        return generate_java_fun()
+    else:
+        return generate_python_fun()
+
+# Generate a Python fynction
+def generate_python_fun():
+    return ("def my_function%s(): \n\t#%s" % (generate_stuff(3, string.digits), (generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters))))
+
+# Generate a Java function that returns void
+# TODO: Create a full class per file
+def generate_java_fun():
+    return ("public void my_function%s(){ \n#%s};" % (generate_stuff(3, string.digits), (generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters))))
+
+# This is where the work happens.
+# The loop runs until we stop it
 while True:
     # Create working directory if it isn't there (uncomment on first use)
     # TODO: check for the directory's existence and run this if needed
     #os.system('mkdir work')
 
     # Generate filename
-    write_file = filename+generate_stuff(4, string.ascii_letters)+file_format
+    write_file = filename+generate_stuff(4, string.ascii_letters)+return_file_format()
     # Randomly decide whether or not to remove existing dump file:
     if(randint(0,99) < clear_dump):
         print("Clearing dump file:")
@@ -38,9 +64,8 @@ while True:
 
     # Write to dump file
     for i in range(randint(1, 64)):
-        # Generate function. Body will be a commented string
-        # TODO: Make this more modular, so that most function formats (and different languages) can be supported
-        stuff = ("def my_function%s(): \n\t#%s" % (generate_stuff(3, string.digits), (generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters))))
+        # Generate function. Body will be a commented string TODO: eventually add random calls to standard library functions?
+        stuff = get_generated_function()
         # Write to file
         os.system('echo "%s" >> work/%s' % (stuff, write_file))
     # Add/commit and push changes to Github
