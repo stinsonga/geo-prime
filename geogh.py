@@ -15,7 +15,7 @@ clear_dump = 0
 # How long to sleep between runs - base time
 sleep_timer = 60
 # Select generated language
-language = "python"
+language = "javascript"
 
 # Our text generator:
 def generate_stuff(length = 32, characters = string.ascii_letters + string.digits):
@@ -27,6 +27,8 @@ def return_file_format():
         return ".py"
     elif(language == "java"):
         return ".java"
+    elif(language == "javascript"):
+        return ".js"
     else:
         return ".py"
 
@@ -34,8 +36,10 @@ def return_file_format():
 def get_generated_function():
     if(language == "python"):
         return generate_python_fun()
-    if(language == "java"):
+    elif(language == "java"):
         return generate_java_fun()
+    elif(language == "javascript"):
+        return generate_javascript_fun()
     else:
         return generate_python_fun()
 
@@ -46,7 +50,11 @@ def generate_python_fun():
 # Generate a Java function that returns void
 # TODO: Create a full class per file
 def generate_java_fun():
-    return ("public void my_function%s(){ \n#%s};" % (generate_stuff(3, string.digits), (generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters))))
+    return ("public void my_function%s(){ \n//%s\n}" % (generate_stuff(3, string.digits), (generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters))))
+
+# Generate a Javascript function
+def generate_javascript_fun():
+    return ("function my_function%s(){ \n//%s\n}" % (generate_stuff(3, string.digits), (generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters))))
 
 # This is where the work happens.
 # The loop runs until we stop it
