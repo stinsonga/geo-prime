@@ -27,7 +27,7 @@ while True:
     # TODO: check for the directory's existence and run this if needed
     #os.system('mkdir work')
 
-    write_file = filename+generate_stuff(2, string.ascii_letters)+".py"
+    write_file = filename+generate_stuff(4, string.ascii_letters)+".py"
     # Randomly decide whether or not to remove existing dump file:
     if(randint(0,99) < clear_dump):
         print("Clearing dump file:")
