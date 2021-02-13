@@ -12,10 +12,12 @@ branch = "master"
 filename = "blahwork"
 # Base commit message
 commit_message = "Exciting stuff "
-# Percent chance to clear dump file on each run of the loop
+# Percent chance to clear dump file on each run of the loop. Set to zero to disable
 clear_dump = 0
 # How long to sleep between runs - base time
 sleep_timer = 60
+# File format extension
+file_format = ".py"
 
 # Our text generator:
 def generate_stuff(length = 32, characters = string.ascii_letters + string.digits):
@@ -27,7 +29,8 @@ while True:
     # TODO: check for the directory's existence and run this if needed
     #os.system('mkdir work')
 
-    write_file = filename+generate_stuff(4, string.ascii_letters)+".py"
+    # Generate filename
+    write_file = filename+generate_stuff(4, string.ascii_letters)+file_format
     # Randomly decide whether or not to remove existing dump file:
     if(randint(0,99) < clear_dump):
         print("Clearing dump file:")
@@ -36,6 +39,7 @@ while True:
     # Write to dump file
     for i in range(randint(1, 64)):
         # Generate function. Body will be a commented string
+        # TODO: Make this more modular, so that most function formats (and different languages) can be supported
         stuff = ("def my_function%s(): \n\t#%s" % (generate_stuff(3, string.digits), (generate_stuff(32, string.digits) + generate_stuff(32, string.ascii_letters))))
         # Write to file
         os.system('echo "%s" >> work/%s' % (stuff, write_file))
